@@ -1,60 +1,36 @@
-from string import ascii_lowercase
+from criptografia import *
 
-lista = ascii_lowercase
-
-def crip(text='', letras='', base=3):
-        from unidecode import unidecode
-
-        text = unidecode(text.strip().lower())
-        crip = str()
-
-        for i in text:
-                if not i in letras and i != ' ':
-                        continue
-                try:
-                        crip += i if i == ' ' else letras[letras.index(i) + base]
-                except:
-                        crip += letras[(letras.index(i) + base) - 26]
-        return crip
-
-
-def descrip(crip='', letras='', base=3):
-        crip = crip.strip().lower()
-        texto = str()
-        for i in crip:
-                texto += i if i == ' ' else letras[letras.index(i) - base]
-        return texto
-
-
-vr = '\033[32;1m'
+verde = '\033[32;1m'
 f = '\033[37;1m'
 n = '\033[1m'
 
-banner = f'''{vr}   ______   _    ____
+
+banner = f'''{verde}   ______   _    ____
   / ____/  (_)  / __/  _____   ____ _
  / /      / /  / /_   / ___/  / __ `/
 / /___   / /  / __/  / /     / /_/ /
 \____/  /_/  /_/    /_/      \__,_/{f}'''
 
-per = 's'
-while per == 's':
+
+continuar = 's'
+while continuar == 's':
         print('\x1b[2J\x1b[1;1H')
         print(banner)
         try:
-                rsp = input(f'\n{n}[ {vr}1{f} ] > {vr}Criptografar{f}\n[ {vr}2{f} ] > {vr}Descriptografar{f}\n\n[ {vr}0{f} ] {vr}Sair\n\n>>>{f} ').strip()[0]
+                opcao = input(f'\n{n}[ {verde}1{f} ] > {verde}Criptografar{f}\n[ {verde}2{f} ] > {verde}Descriptografar{f}\n\n[ {verde}0{f} ] {verde}Sair\n\n>>>{f} ').strip()[0]
         except:
                 continue
-        if rsp == '0': break
-        if not rsp in '120': continue
+        if opcao == '0': break
+        if not opcao in '120': continue
         try:
-                b = int(input(f"Digite a base: (\033[33;1menter para padrão{f}) "))
+                base = int(input(f"Digite a base: (\033[33;1menter para padrão{f}) "))
         except:
-                b = 3
-        match rsp:
+                base = 3
+        match opcao:
                 case '1':
                         texto = input('Texto para criptografar: \033[4;1m').strip().lower()
-                        print(f'\033[m{f}Seu texto: {vr}{crip(texto, lista, b)}{f}')
+                        print(f'\033[m{f}Seu texto: {verde}{crip(texto, lista, base)}{f}')
                 case '2':
                         crip = input('Texto para descriptografar: \033[1;4m').strip().lower()
-                        print(f'\033[m{f}Seu texto: {vr}{descrip(crip, lista, b)}{f}')
-        per = input('Deseja voltar? [s/n] ').strip().lower()[0]
+                        print(f'\033[m{f}Seu texto: {verde}{descrip(crip, lista, base)}{f}')
+        continuar = input('Deseja voltar? [s/n] ').strip().lower()[0]
