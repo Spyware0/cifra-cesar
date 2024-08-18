@@ -23,6 +23,7 @@ Com a cifra na base 3: jdeulho
 apt-get update 
 apt-get upgrade
 apt-get install git python
+pip install colorama
 git clone https://github.com/OnlyFalopas/cifra-cesar
 cd cifra-cesar
 python main.py
